@@ -1,3 +1,2 @@
 # Python workspace
-
-Put your apps here (each app in its own subfolder).
+Put your apps here (one subfolder per app).
