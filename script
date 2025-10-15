@@ -1,0 +1,54 @@
+cd /projects/python
+
+# 0) If a folder named "projects" exists and looks like a venv, park it under .venvs/
+if [ -d projects ] && [ -x projects/bin/python ]; then
+  mkdir -p .venvs
+  mv projects .venvs/projects
+  echo "Moved existing venv to .venvs/projects"
+fi
+
+# 1) Rename top-level folder: python/ -> projects/
+[ -d python ] && git mv python projects
+
+# 2) Point VS Code at your interpreter
+#   - If your venv is at .venvs/projects (recommended)
+cat > .vscode/settings.json <<'JSON'
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venvs/projects/bin/python",
+  "editor.formatOnSave": true,
+  "python.testing.pytestEnabled": true,
+  "python.testing.pytestArgs": ["projects/tests"],
+  "python.analysis.typeCheckingMode": "basic",
+  "ruff.enable": true,
+  "ruff.lint.run": "onType",
+  "terminal.integrated.cwd": "${workspaceFolder}"
+}
+JSON
+
+# 3) Per-app settings inside the renamed folder (so test discovery works when you open that folder alone)
+mkdir -p projects/.vscode
+cat > projects/.vscode/settings.json <<'JSON'
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/../.venvs/projects/bin/python",
+  "python.testing.pytestEnabled": true,
+  "python.testing.pytestArgs": ["tests"],
+  "editor.formatOnSave": true,
+  "ruff.enable": true,
+  "ruff.lint.run": "onType"
+}
+JSON
+
+# 4) (Re)install dev deps for the project in this venv and run quick checks
+if [ -x .venvs/projects/bin/python ]; then
+  source .venvs/projects/bin/activate
+fi
+python -m pip install -U pip
+pip install -e "projects[dev]"
+pytest -q projects
+python -m app.main 2>/dev/null || (cd projects && python -m app.main || true)
+
+# 5) Commit & push
+git add -A
+git commit -m "Rename top-level folder: python -> projects; update VS Code settings"
+git push
+
