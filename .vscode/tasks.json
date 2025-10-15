@@ -1,0 +1,8 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {"label": "Format", "type": "shell", "command": "ruff check --fix . && black ."},
+    {"label": "Lint",   "type": "shell", "command": "ruff check ."},
+    {"label": "Test",   "type": "shell", "command": "pytest -q"}
+  ]
+}
