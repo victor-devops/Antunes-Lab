@@ -1,54 +1,32 @@
-cd /projects/python
+# stay in /main-lab/projects
 
-# 0) If a folder named "projects" exists and looks like a venv, park it under .venvs/
-if [ -d projects ] && [ -x projects/bin/python ]; then
-  mkdir -p .venvs
-  mv projects .venvs/projects
-  echo "Moved existing venv to .venvs/projects"
-fi
+# If you want an archive branch AND it already exists, skip creating it:
+git switch main
 
-# 1) Rename top-level folder: python/ -> projects/
-[ -d python ] && git mv python projects
+# Remove the old project bits from python/
+git rm -r python/src python/tests python/pyproject.toml python/README.md 2>/dev/null || true
+git rm -r python/.pytest_cache python/.ruff_cache 2>/dev/null || true
 
-# 2) Point VS Code at your interpreter
-#   - If your venv is at .venvs/projects (recommended)
+# Leave a placeholder README so the folder stays in Git
+printf '# Python workspace\n\nPut your apps here (each app in its own subfolder).\n' > python/README.md
+git add python/README.md
+
+# Root VS Code settings: point to your venv and stop looking for python/tests
+mkdir -p .vscode
 cat > .vscode/settings.json <<'JSON'
 {
   "python.defaultInterpreterPath": "${workspaceFolder}/.venvs/projects/bin/python",
   "editor.formatOnSave": true,
-  "python.testing.pytestEnabled": true,
-  "python.testing.pytestArgs": ["projects/tests"],
-  "python.analysis.typeCheckingMode": "basic",
   "ruff.enable": true,
   "ruff.lint.run": "onType",
+  "python.testing.pytestEnabled": true,
+  "python.testing.pytestArgs": [],
   "terminal.integrated.cwd": "${workspaceFolder}"
 }
 JSON
 
-# 3) Per-app settings inside the renamed folder (so test discovery works when you open that folder alone)
-mkdir -p projects/.vscode
-cat > projects/.vscode/settings.json <<'JSON'
-{
-  "python.defaultInterpreterPath": "${workspaceFolder}/../.venvs/projects/bin/python",
-  "python.testing.pytestEnabled": true,
-  "python.testing.pytestArgs": ["tests"],
-  "editor.formatOnSave": true,
-  "ruff.enable": true,
-  "ruff.lint.run": "onType"
-}
-JSON
-
-# 4) (Re)install dev deps for the project in this venv and run quick checks
-if [ -x .venvs/projects/bin/python ]; then
-  source .venvs/projects/bin/activate
-fi
-python -m pip install -U pip
-pip install -e "projects[dev]"
-pytest -q projects
-python -m app.main 2>/dev/null || (cd projects && python -m app.main || true)
-
-# 5) Commit & push
+# Commit and push (as trapp, NOT sudo)
 git add -A
-git commit -m "Rename top-level folder: python -> projects; update VS Code settings"
-git push
+git commit -m "Clean python/ container; remove old app; update VS Code settings"
+git push -u origin main
 
