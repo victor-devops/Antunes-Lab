@@ -1,13 +1,14 @@
-cd /projects/python
-
-cat > Antunes-Lab.code-workspace <<'JSON'
 {
   "folders": [
-    { "path": "." }
+    { "path": "ansible" },
+    { "path": "aws" },             // change to "awx" if that's what you meant
+    { "path": "linux-scripts" },
+    { "path": "others" },
+    { "path": "powershell" },
+    { "path": "python" }
   ],
   "settings": {
-    "terminal.integrated.cwd": "${workspaceFolder}"
+    "python.defaultInterpreterPath": "/main-lab/projects/.venvs/projects/bin/python",
+    "terminal.integrated.cwd": "/main-lab/projects"
   }
 }
-JSON
-
