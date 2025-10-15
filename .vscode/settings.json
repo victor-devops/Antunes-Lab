@@ -2,7 +2,7 @@
   "python.defaultInterpreterPath": "${workspaceFolder}/.venvs/projects/bin/python",
   "editor.formatOnSave": true,
   "python.testing.pytestEnabled": true,
-  "python.testing.pytestArgs": ["projects/tests"],
+  "python.testing.pytestArgs": ["apps/tests"],
   "python.analysis.typeCheckingMode": "basic",
   "ruff.enable": true,
   "ruff.lint.run": "onType",
