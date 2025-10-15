@@ -1,32 +1,24 @@
-# stay in /main-lab/projects
+cd /main-lab/projects
 
-# If you want an archive branch AND it already exists, skip creating it:
-git switch main
-
-# Remove the old project bits from python/
-git rm -r python/src python/tests python/pyproject.toml python/README.md 2>/dev/null || true
-git rm -r python/.pytest_cache python/.ruff_cache 2>/dev/null || true
-
-# Leave a placeholder README so the folder stays in Git
-printf '# Python workspace\n\nPut your apps here (each app in its own subfolder).\n' > python/README.md
-git add python/README.md
-
-# Root VS Code settings: point to your venv and stop looking for python/tests
-mkdir -p .vscode
-cat > .vscode/settings.json <<'JSON'
+cat > Antunes-Lab.code-workspace <<'JSON'
 {
-  "python.defaultInterpreterPath": "${workspaceFolder}/.venvs/projects/bin/python",
-  "editor.formatOnSave": true,
-  "ruff.enable": true,
-  "ruff.lint.run": "onType",
-  "python.testing.pytestEnabled": true,
-  "python.testing.pytestArgs": [],
-  "terminal.integrated.cwd": "${workspaceFolder}"
+  "folders": [
+    { "path": "ansible" },
+    { "path": "aws" },             // change to "awx" if that's what you meant
+    { "path": "linux-scripts" },
+    { "path": "others" },
+    { "path": "powershell" },
+    { "path": "python" }
+  ],
+  "settings": {
+    "python.defaultInterpreterPath": "/main-lab/projects/.venvs/projects/bin/python",
+    "terminal.integrated.cwd": "/main-lab/projects"
+  }
 }
 JSON
 
-# Commit and push (as trapp, NOT sudo)
-git add -A
-git commit -m "Clean python/ container; remove old app; update VS Code settings"
-git push -u origin main
+# Update repo (no sudo)
+git add Antunes-Lab.code-workspace
+git commit -m "Workspace: show only ansible, aws, linux-scripts, others, powershell, python"
+git push
 
