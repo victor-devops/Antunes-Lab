@@ -1,11 +1,13 @@
+cd /projects/python
+
+cat > Antunes-Lab.code-workspace <<'JSON'
 {
   "folders": [
-    { "path": "." },
-    { "path": "python" },
-    { "path": "linux-scripts" },
-    { "path": "powershell" },
-    { "path": "ansible" },
-    { "path": "aws" }
+    { "path": "." }
   ],
-  "settings": { "terminal.integrated.cwd": "${workspaceFolder}" }
+  "settings": {
+    "terminal.integrated.cwd": "${workspaceFolder}"
+  }
 }
+JSON
+

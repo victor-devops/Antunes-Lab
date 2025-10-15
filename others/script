@@ -1,0 +1,15 @@
+mkdir -p others
+
+# whitelist of top-level items to KEEP at root
+keep="python linux-scripts powershell ansible aws .git .github .gitignore .pre-commit-config.yaml .vscode README.md Antunes-Lab.code-workspace projects"
+
+# move everything else into others/
+for f in .* *; do
+  # skip . and ..
+  [ "$f" = "." ] || [ "$f" = ".." ] && continue
+  # skip items in the keep list
+  case " $keep " in *" $f "*) continue ;; esac
+  # only if it exists and not 'others' itself
+  [ -e "$f" ] && [ "$f" != "others" ] && git mv "$f" others/
+done
+
