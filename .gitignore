@@ -1,5 +1,16 @@
-.venv/
+# Global
+.DS_Store
+*.log
 __pycache__/
-.pytest_cache/
-dist/
 *.pyc
+.pytest_cache/
+
+# Python venv(s)
+.venv/
+projects/
+python/.venv/
+
+# Build / node
+dist/
+build/
+node_modules/

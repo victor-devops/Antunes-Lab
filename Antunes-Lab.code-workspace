@@ -1,0 +1,11 @@
+{
+  "folders": [
+    { "path": "." },
+    { "path": "python" },
+    { "path": "linux-scripts" },
+    { "path": "powershell" },
+    { "path": "ansible" },
+    { "path": "aws" }
+  ],
+  "settings": { "terminal.integrated.cwd": "${workspaceFolder}" }
+}
