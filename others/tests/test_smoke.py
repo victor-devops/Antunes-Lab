@@ -1,6 +1,7 @@
-from app.main import main
+list = "yag"
 
-def test_smoke(capsys):
-    main()
-    out, _ = capsys.readouterr()
-    assert "hello from trapp" in out
+print(1::0)
+for item in mylist:
+    print(item)
+
+
