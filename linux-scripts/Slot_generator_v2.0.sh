@@ -18,7 +18,7 @@ echo "                                                                    ";
 
 # Colours
 GREEN="\033[0;32m"
-NC="\033[0m"  # reset
+NC="\033[0m" 
 
 read -rp "Enter the path to base config file: " CFG_FILE
 if [[ ! -f "$CFG_FILE" ]]; then
@@ -40,7 +40,6 @@ QTY_KEYPAD=${QTY_KEYPAD:-0}
 read -rp "Number of new call points (VocoTouch) to add: " QTY_CALLPOINT
 QTY_CALLPOINT=${QTY_CALLPOINT:-0}
 
-# Sanity checks on quantities
 for q in QTY_HEADSET QTY_HANDSET QTY_KEYPAD QTY_CALLPOINT; do
   v=${!q}
   if ! [[ "$v" =~ ^[0-9]+$ ]]; then
@@ -57,18 +56,16 @@ fi
 
 trim() {
   local s="$1"
-  s="${s#"${s%%[![:space:]]*}"}"   # ltrim
-  s="${s%"${s##*[![:space:]]}"}"   # rtrim
+  s="${s#"${s%%[![:space:]]*}"}"  
+  s="${s%"${s##*[![:space:]]}"}"   
   printf '%s' "$s"
 }
 
-# Consider a token "empty" if, after trimming and stripping quotes, nothing remains
 is_empty_token() {
   local t
   t=$(trim "$1")
-  t=${t%$'\r'}  # strip CR if present
+  t=${t%$'\r'}
 
-  # Strip surrounding quotes if present
   if [[ "$t" =~ ^\"(.*)\"$ ]]; then
     t="${BASH_REMATCH[1]}"
     t=$(trim "$t")
@@ -137,22 +134,16 @@ done
 max_slot=-1
 free_idx=0
 
-# Helper: given existing numbers + needed count, return assigned numbers
 assign_with_gaps() {
   local -a existing=()
   local max needed
   local -a out=()
-
-  # args:
-  #   $1 = pattern string for grep in DISP ("VocoVoice", "VocoPhone"...)
-  #   $2 = needed count
   local pattern="$1"
   needed=$2
 
   max=0
   existing=()
 
-  # collect existing numbers for this pattern from DISP
   local tok t num
   for tok in "${DISP_ARR[@]}"; do
     t=$(trim "$tok")
@@ -283,8 +274,8 @@ if (( QTY_CALLPOINT > 0 )); then
 
   for (( k=0; k<QTY_CALLPOINT; k++ )); do
     slot_idx=${free_slots[free_idx]}; ((free_idx++))
-    disp_num=${callpoint_nums[k]}          # VocoTouch display number (1,2,...)
-    code_num=$((disp_num + 100))           # 1 -> 101, 2 -> 102, ...
+    disp_num=${callpoint_nums[k]}       
+    code_num=$((disp_num + 100))           
     code3=$(printf "%03d" "$code_num")
 
     HS_VAL[slot_idx]="$slot_idx"
@@ -296,7 +287,7 @@ if (( QTY_CALLPOINT > 0 )); then
     AUTHNAME_VAL[slot_idx]="\"vocok${code3}\""
 
     a=${code3:0:1}; b=${code3:1:1}; c=${code3:2:1}
-    pass3="${c}${b}${a}"                  # 101 -> 101, 102 -> 201, etc.
+    pass3="${c}${b}${a}"            
     AUTHPASS_VAL[slot_idx]="\"${pass3}kocov\""
 
     DISP_VAL[slot_idx]="\"VocoTouch ${disp_num}\""
