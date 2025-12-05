@@ -28,16 +28,16 @@ fi
 
 read -rp "Enter customer name: " CUSTOMER
 
-read -rp "Number of new headsets (VocoVoice) to add: " QTY_HEADSET
+read -rp "Number of new Headsets (VocoVoice) to add: " QTY_HEADSET
 QTY_HEADSET=${QTY_HEADSET:-0}
 
-read -rp "Number of new handsets (VocoPhone) to add: " QTY_HANDSET
+read -rp "Number of new Handsets (VocoPhone) to add: " QTY_HANDSET
 QTY_HANDSET=${QTY_HANDSET:-0}
 
-read -rp "Number of new keypads (VocoMessage) to add: " QTY_KEYPAD
+read -rp "Number of new Keypads (VocoMessage) to add: " QTY_KEYPAD
 QTY_KEYPAD=${QTY_KEYPAD:-0}
 
-read -rp "Number of new call points (VocoTouch) to add: " QTY_CALLPOINT
+read -rp "Number of new Call Points (VocoTouch) to add: " QTY_CALLPOINT
 QTY_CALLPOINT=${QTY_CALLPOINT:-0}
 
 for q in QTY_HEADSET QTY_HANDSET QTY_KEYPAD QTY_CALLPOINT; do
@@ -360,5 +360,5 @@ cat > "$OUT_PATH" <<EOF
 EOF
 
 echo
-printf "%b\n" "${GREEN}Created: ${QTY_HEADSET} headsets, ${QTY_HANDSET} handsets, ${QTY_KEYPAD} keypads, ${QTY_CALLPOINT} call points (total ${TOTAL})${NC}"
+printf "%b\n" "${GREEN}Created: ${QTY_HEADSET} Headsets, ${QTY_HANDSET} Handsets, ${QTY_KEYPAD} Keypads, ${QTY_CALLPOINT} Call Points (total ${TOTAL})${NC}"
 echo "Generated config saved to: $OUT_PATH"
