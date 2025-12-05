@@ -182,7 +182,6 @@ assign_with_gaps() {
 # 1) Headsets (VocoVoice)
 # -------------------------------------------------------------------
 if (( QTY_HEADSET > 0 )); then
-  # get assigned numbers as space-separated string, then into array
   read -r -a headset_nums <<< "$(assign_with_gaps "VocoVoice" "$QTY_HEADSET")"
 
   for (( k=0; k<QTY_HEADSET; k++ )); do
