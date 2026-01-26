@@ -11,9 +11,7 @@ export const Skills = () => {
     relative overflow-visible
     flex flex-col items-center
     pt-10 md:pt-14 lg:pt-16
-    pb-16
-  "
-    >
+    pb-16">
 
       <SkillText />
 

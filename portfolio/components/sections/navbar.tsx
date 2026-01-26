@@ -10,8 +10,10 @@ export const Navbar = () => {
 
   return (
     <div className="w-full h-[65px] fixed top-0 shadow-lg shadow-[#2A0E61]/50 bg-[#0000001a] backdrop-blur-md z-50 px-10">
+
       {/* Navbar Container */}
       <div className="w-full h-full flex items-center justify-between m-auto px-[10px]">
+
         {/* Logo + Name */}
         <Link href="/" className="flex items-center">
           <Image
@@ -31,16 +33,16 @@ export const Navbar = () => {
             {NAV_LINKS.map((link) => {
               const isExternal = link.link.startsWith("http");
               return (
-              <Link
-                key={link.title}
-                href={link.link}
-                target={isExternal ? "_blank" : undefined}
-                rel={isExternal ? "noreferrer noopener" : undefined}
-                className="cursor-pointer hover:text-[rgb(112,66,248)] transition"
-              >
-                {link.title}
-              </Link>
-            );
+                <Link
+                  key={link.title}
+                  href={link.link}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noreferrer noopener" : undefined}
+                  className="cursor-pointer hover:text-[rgb(112,66,248)] transition"
+                >
+                  {link.title}
+                </Link>
+              );
             })}
 
           </div>
@@ -72,7 +74,7 @@ export const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Hamburger Menu */}
       {isMobileMenuOpen && (
         <div className="absolute top-[65px] left-0 w-full bg-[#0b0616] p-6 flex flex-col items-center text-gray-200 shadow-[0_18px_40px_rgba(0,0,0,0.45)] md:hidden overflow-hidden">
           <div className="pointer-events-none absolute inset-0">

@@ -41,8 +41,7 @@ export const ProjectCard = ({
                 href={link}
                 target={isPrimaryExternal ? "_blank" : undefined}
                 rel={isPrimaryExternal ? "noreferrer noopener" : undefined}
-                className="hover:text-purple-100 transition-colors"
-              >
+                className="hover:text-purple-100 transition-colors">
                 {ctaLabel}
                 <HiArrowUpRight className="ml-1 inline-block h-4 w-4 translate-y-[1px] text-purple-200 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
@@ -52,8 +51,7 @@ export const ProjectCard = ({
                 href={secondaryLink}
                 target={isSecondaryExternal ? "_blank" : undefined}
                 rel={isSecondaryExternal ? "noreferrer noopener" : undefined}
-                className="text-purple-300 hover:text-purple-200 transition-colors"
-              >
+                className="text-purple-300 hover:text-purple-200 transition-colors">
                 {secondaryLabel ?? "Source Code"}
                 <HiArrowUpRight className="ml-1 inline-block h-4 w-4 translate-y-[1px]" />
               </Link>

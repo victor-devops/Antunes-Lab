@@ -11,7 +11,6 @@ export const HeroContent = () => {
     <motion.div
       initial="hidden"
       animate="visible"
-      // Mobile stacks, desktop is 2 columns
       className="flex flex-col xl:flex-row items-center justify-center
   px-6 md:px-10 xl:px-20
   pt-[100px] sm:pt-[145px] md:pt-[190px] xl:pt-[290px]

@@ -32,8 +32,6 @@ export default function CalculatorPage() {
     }
     if (key === "=") {
       try {
-        // Simple eval for basic arithmetic input.
-        // eslint-disable-next-line no-new-func
         const result = Function(`"use strict"; return (${display})`)();
         setDisplay(String(result));
       } catch {
@@ -64,11 +62,10 @@ export default function CalculatorPage() {
                   key={key}
                   type="button"
                   onClick={() => handleKey(key)}
-                  className={`aspect-square rounded-2xl border text-2xl font-semibold text-white shadow-[0_8px_16px_rgba(28,12,45,0.35)] transition-transform duration-150 hover:-translate-y-0.5 active:translate-y-0.5 ${
-                    isOperator
+                  className={`aspect-square rounded-2xl border text-2xl font-semibold text-white shadow-[0_8px_16px_rgba(28,12,45,0.35)] transition-transform duration-150 hover:-translate-y-0.5 active:translate-y-0.5 ${isOperator
                       ? "border-purple-300/30 bg-gradient-to-br from-purple-500/80 to-purple-700/80"
                       : "border-purple-300/15 bg-gradient-to-br from-[#562d82]/70 to-[#2d1647]/90"
-                  }`}
+                    }`}
                 >
                   {key}
                 </button>
