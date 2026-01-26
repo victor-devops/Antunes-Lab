@@ -1,0 +1,12 @@
+# Global
+.DS_Store
+*.log
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Python venv(s)
+.venv/
+
+# Build / node
+.venvs/

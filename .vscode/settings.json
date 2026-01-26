@@ -1,0 +1,9 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venvs/projects/bin/python",
+  "editor.formatOnSave": true,
+  "ruff.enable": true,
+  "ruff.lint.run": "onType",
+  "python.testing.pytestEnabled": true,
+  "python.testing.pytestArgs": [],
+  "terminal.integrated.cwd": "${workspaceFolder}"
+}
